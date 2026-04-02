@@ -8,3 +8,5 @@ y = np.random.normal(0, 1, size)
 
 plt.plot(x,y)
 plt.show()
+
+############################################
