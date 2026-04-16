@@ -18,7 +18,7 @@ class MCP4725:
         if not isinstance(number, int):
             print("На вход ЦАП можно подавать только целые числа")
         if not (0 <= number <= 4095):
-            print("Число выходит за разрядность MCP4752 (12 бит)")
+            print("Число выходит за разрядность MCP4725 (12 бит)")
         first_byte = self.wm | self.pds | number >> 8
         second_byte = number & 0xFF
         self.bus.write_byte_data(self.address, first_byte, second_byte)
