@@ -5,7 +5,7 @@ from time import time, sleep
 voltage_values = list()
 time_values = list()
 sampling_periods = list()
-duration = 30.
+duration = 3.
 max_voltage = 3.56
 
 if __name__ == "__main__":
@@ -26,8 +26,8 @@ if __name__ == "__main__":
 
         print("Измерения завершены.")
 
-        plot(time_values, voltage_values, max_voltage)
-        hist(time_values) 
+        plot(time_values, voltage_values, max_voltage, duration)
+        hist(sampling_periods, max(sampling_periods)) 
 
     finally:
         adc.deinit()
