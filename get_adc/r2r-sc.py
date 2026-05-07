@@ -1,4 +1,4 @@
-from r2r_adc_first import R2R_ADC
+from r2r_adc import R2R_ADC
 from adc_plot import plot_voltage_vs_time as plot, plot_sampling_period_hist as hist
 from time import time, sleep
 
