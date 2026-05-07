@@ -1,35 +1,43 @@
 import smbus
-import time
+from time import sleep
+# raspi-gpio set 2 a0
+# raspi-gpio set 3 a0
+
 
 class MCP3021:
-    def __init__(self, dynamic_range, verbose = False):
+    def __init__(self, dynamic_range, address=0x4D, verbose = False):
         self.bus = smbus.SMBus(1)
-        self.dynamic_range = dynamic_range
-        self.address = 0x4D
+        self.address = address
+
         self.verbose = verbose
+        self.dynrange = dynamic_range
 
     def deinit(self):
         self.bus.close()
-
+    
     def get_number(self):
+        # if not isintance(number, int):
+            # print("На вход только числа!!1")
         data = self.bus.read_word_data(self.address, 0)
-        lower_data_byte = data >> 8
-        upper_data_byte = data & 0xFF
-        number = (upper_data_byte << 6) | (lower_data_byte >> 2)
+        lower_byte = data >> 8
+        upper_byte = data & 0xFF
+        number = (upper_byte << 6) | (lower_byte >> 2)
         if self.verbose:
-            print(f"Принятые данные: {data}, Старший байт: "
-                  f"{upper_data_byte:x}, Младший байт: {lower_data_byte:x}, "
-                  f"Число: {number}")
+            print(f"Принятые данные: {data} | верхний/нижний: {upper_byte:x}/{lower_byte:x}, число: {number}")
         return number
 
     def get_voltage(self):
-        return self.get_number() / 1023 * self.dynamic_range
+        return self.dynrange * self.get_number() / 1024
+
 
 if __name__ == "__main__":
     try:
-        mcp = MCP3021(5.22)
+        adc = MCP3021(5.20, verbose=True)
         while True:
-            print(f"Полученное напряжение: {mcp.get_voltage():.2f}")
-            time.sleep(1)
+            try:
+                print(f"Напряжение: {adc.get_voltage():.3f} В")
+                sleep(.25)
+            except ValueError:
+                print("Вы ввели не число. Попробуйте ещё раз.\n")
     finally:
-        mcp.deinit()
+        adc.deinit()
