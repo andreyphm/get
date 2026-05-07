@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
         exp_start = time()
         while time() - exp_start <= duration:
-            voltage_values.append(adc.get_sar_voltage())
+            voltage_values.append(adc.get_sc_voltage())
             time_values.append(time() - exp_start)
 
         for i in range(1, len(time_values)):
