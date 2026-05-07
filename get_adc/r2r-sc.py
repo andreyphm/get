@@ -1,4 +1,4 @@
-from r2r_adc import R2R_ADC
+from r2r_adc_first import R2R_ADC
 from adc_plot import plot_voltage_vs_time as plot, plot_sampling_period_hist as hist
 from time import time, sleep
 
@@ -26,8 +26,8 @@ if __name__ == "__main__":
 
         print("Измерения завершены.")
 
-        plot(time_values, voltage_values, max_voltage, duration)
-        hist(sampling_periods, max(sampling_periods)) 
+        plot_voltage_vs_time(time_values, voltage_values, max_voltage, duration)
+        plot_sampling_period_hist(sampling_periods, max(sampling_periods)) 
 
     finally:
         adc.deinit()
