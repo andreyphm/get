@@ -5,7 +5,7 @@ from time import time, sleep
 voltage_values = list()
 time_values = list()
 sampling_periods = list()
-duration = 3.
+duration = 30.
 max_voltage = 3.56
 
 if __name__ == "__main__":
