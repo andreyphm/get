@@ -26,8 +26,8 @@ if __name__ == "__main__":
 
         print("Измерения завершены.")
 
-        plot_voltage_vs_time(time_values, voltage_values, max_voltage, duration)
-        plot_sampling_period_hist(sampling_periods, max(sampling_periods)) 
+        plot(time_values, voltage_values, max_voltage, duration)
+        hist(sampling_periods, max(sampling_periods)) 
 
     finally:
         adc.deinit()
