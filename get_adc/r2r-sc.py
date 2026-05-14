@@ -10,7 +10,7 @@ max_voltage = 3.56
 
 if __name__ == "__main__":
     try:
-        adc = R2R_ADC(3.29)
+        adc = R2R_ADC(3.29, 0.001)
         for _ in range(3, 0, -1):
             print(f"Установка готова, начало измерений через {_}...", end='\b\r')
             sleep(1)
